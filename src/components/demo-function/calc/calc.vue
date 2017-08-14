@@ -1,5 +1,6 @@
 <template>
   <div class="box">
+    <h1>2017/8/15 仿iphone计算器   </h1>
     <div class="content">
       <div class="result">
         <span class="result-num">{{res}}</span>
