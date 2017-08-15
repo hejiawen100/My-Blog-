@@ -47,13 +47,14 @@
 </template>
 
 <script>
+  import {test} from '@/../static/js/common.js'
   export default {
     name: 'calc',
     data() {
       return {
         res: 0,
         process:[],
-        start:false
+        start:true
 
       }
     },
@@ -61,8 +62,10 @@
     },
     methods: {
       returnZero(){
+        console.log('1')
         this.res = 0
         this.process = []
+        test()
       }
     }
   }
@@ -129,7 +132,11 @@
   .num {
     background-color: #D4D5D9;
   }
-
+  .gray:active,
+  .num:active{
+    background-color: #eee;
+    color:#fff;
+  }
   .zero {
     width: 140px;
   }
@@ -138,5 +145,8 @@
     color:#fff;
     font-size:40px;
     background-color: #F88A11;
+  }
+  .operator:active {
+    background-color: #F87715;
   }
 </style>
