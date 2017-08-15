@@ -1,7 +1,10 @@
 <template>
   <div class="box">
     <h1>2017/8/15 仿iphone计算器   </h1>
-    <div class="content">
+    <div class="content" onselectstart="return false">
+      <div class="expression">
+        <span class="result-num">{{process.toString()}}</span>
+      </div>
       <div class="result">
         <span class="result-num">{{res}}</span>
       </div>
@@ -38,8 +41,8 @@
 
         <ul>
           <li colspan="2" class="num zero">0</li>
-          <li class="num">.</li>
-          <li class="operator">=</li>
+          <li class="num spot">.</li>
+          <li class="calculate" @click="calculate">=</li>
         </ul>
       </div>
     </div>
@@ -48,24 +51,92 @@
 
 <script>
   import {test} from '@/../static/js/common.js'
+
   export default {
     name: 'calc',
     data() {
       return {
         res: 0,
-        process:[],
-        start:true
+        process: [],
+        start: false,
+        currentNum: '',
+        currentSym: ''
 
       }
     },
     created() {
     },
+    mounted() {
+      let num = document.querySelectorAll('.num')
+      let opreator = document.querySelectorAll('.operator')
+      num.forEach(item => {
+        item.addEventListener('click', this.numClick)
+      })
+      opreator.forEach(item => {
+        item.addEventListener('click', this.operatorClick)
+      })
+
+    },
     methods: {
-      returnZero(){
-        console.log('1')
+      //归零
+      returnZero() {
         this.res = 0
         this.process = []
+        this.currentNum = ''
+        this.currentSym = ''
+        this.start = false
         test()
+      },
+      //点击数字
+      numClick(event) {
+        let target = event.target
+        if (this.currentNum.length >= 8) return
+        this.currentNum += target.innerHTML
+
+        this.res = this.currentNum
+        this.start = true
+      },
+      operatorClick(event) {
+        this.currentSym = event.target.innerHTML
+        if(this.currentNum){
+          this.pushNum(this.currentNum)
+          this.pushSym(this.currentSym)
+          console.log('return')
+        }else{
+          let last = this.process[this.process.length - 1]
+          let reg = /^\+|\-|\×|\÷$/ig
+          console.log(last)
+          console.log(reg.test(last))
+          if (!(reg.test(last))) {
+            console.log(this.process.join(''))
+//            this.pushSym(this.currentSym)
+          }else{
+            console.error('多次运算符')
+          }
+        }
+
+      },
+      pushNum(str) {
+        this.process.push(str)
+        this.currentNum = ''
+        this.res = 0
+        console.log('num push in')
+      },
+      pushSym(str) {
+        this.process.push(str)
+        this.currentSym = ''
+        this.res = 0
+        console.log('sym push in')
+      },
+      calculate() {
+        if (this.currentNum) {
+          this.pushNum(this.currentNum)
+        }
+        let express = this.process.join('').replace(/\×/ig, '*').replace(/\÷/ig, '/')
+        console.log(express)
+        this.res = eval(express)
+        this.process = []
+        this.process.push(this.res)
       }
     }
   }
@@ -86,6 +157,9 @@
     -moz-box-sizing: border-box;
     box-sizing: border-box;
     border-left: 1px solid #202020;
+    /*取消双击选中文字*/
+    -moz-user-select: none;
+
   }
 
   .result {
@@ -96,13 +170,13 @@
   }
 
   .result-num {
-    font-size:50px;
-    color:#fff;
-    position:absolute;
+    font-size: 50px;
+    color: #fff;
+    position: absolute;
     bottom: 0;
-    width:95%;
+    width: 95%;
     text-align: right;
-    height:70px;
+    height: 70px;
   }
 
   li {
@@ -126,26 +200,31 @@
 
   .gray {
     background-color: #C4C5C9;
-    font-size:20px;
+    font-size: 20px;
   }
 
   .num {
     background-color: #D4D5D9;
   }
+
   .gray:active,
-  .num:active{
+  .num:active {
     background-color: #eee;
-    color:#fff;
+    color: #fff;
   }
+
   .zero {
     width: 140px;
   }
 
+  .calculate,
   .operator {
-    color:#fff;
-    font-size:40px;
+    color: #fff;
+    font-size: 40px;
     background-color: #F88A11;
   }
+
+  .calculate:active,
   .operator:active {
     background-color: #F87715;
   }
