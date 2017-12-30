@@ -9,7 +9,7 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
-      path:'/personal-center/',
+      path:'/',
       name:'index',
       component:PersonalCenter
     },

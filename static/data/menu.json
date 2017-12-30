@@ -1,0 +1,16 @@
+[{
+  "label": "个人中心",
+  "url": "/",
+  "index": "/",
+  "children": []
+}, {
+  "label": "小功能",
+  "url": "/demo-function/",
+  "index": "/demo-function/",
+  "children": [{
+    "label": "计算器",
+    "url": "/demo-function/calc/",
+    "index": "/demo-function/calc/",
+    "children": []
+  }]
+}]
