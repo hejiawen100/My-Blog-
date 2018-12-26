@@ -1,16 +1,34 @@
-[{
-  "label": "个人中心",
-  "url": "/",
-  "index": "/",
-  "children": []
-}, {
-  "label": "小功能",
-  "url": "/demo-function/",
-  "index": "/demo-function/",
-  "children": [{
-    "label": "计算器",
-    "url": "/demo-function/calc/",
-    "index": "/demo-function/calc/",
+[
+  {
+    "label": "个人中心",
+    "url": "/",
+    "index": "/",
     "children": []
-  }]
-}]
+  },
+  {
+    "label": "小功能",
+    "url": "/demo-function/",
+    "index": "/demo-function/",
+    "children": [
+      {
+        "label": "计算器",
+        "url": "/demo-function/calc/",
+        "index": "/demo-function/calc/",
+        "children": []
+      }
+    ]
+  },
+  {
+    "label": "小游戏",
+    "url": "/games/",
+    "index": "/games",
+    "children": [
+      {
+        "label": "2048",
+        "url": "/games/2048/",
+        "index": "/games/2048/",
+        "children": []
+      }
+    ]
+  }
+]

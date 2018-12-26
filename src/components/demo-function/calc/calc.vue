@@ -50,7 +50,7 @@
 </template>
 
 <script>
-  import {test} from '@/../static/js/common.js'
+//  import {test} from '@/../src/common/js/common.js'
 
   export default {
     name: 'calc',
@@ -85,7 +85,6 @@
         this.currentNum = ''
         this.currentSym = ''
         this.start = false
-        test()
       },
       //点击数字
       numClick(event) {

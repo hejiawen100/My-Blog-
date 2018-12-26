@@ -3,7 +3,14 @@ import axios from 'axios'
 const http = {
 
   getJSON(url) {
-    return axios.get(url)
+    return new Promise((resolve, reject) => {
+      axios.get(url).then(res => {
+        resolve (res)
+      }).catch(err => {
+        reject (err)
+      })
+    })
+
   },
   postJOSN() {
 
@@ -11,5 +18,5 @@ const http = {
 }
 export default {
   http
-} 
+}
 
